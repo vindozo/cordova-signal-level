@@ -66,11 +66,10 @@ public class SignalLevel extends CordovaPlugin {
 					Connectivity.isConnectedMobile(context) + "");
 			details.put("WifiSignalLevel",
 					Connectivity.getWifiSignalLevel(context) + "");
-			details.put("isConnectedFast", Connectivity.isConnectedFast(context)
+			details.put("MobileSignalLevel", signalDBM);
+			details.put("ConnectedFast", Connectivity.isConnectedFast(context)
 					+ "");
-			String ssid = Connectivity.getWifiConnectionDetails(context);
-			details.put("wifiSSID", ssid);
-			details.put("cellSignalStrength", signalDBM);
+
 			return details + "";
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -125,59 +124,62 @@ public class SignalLevel extends CordovaPlugin {
 			return info.getBSSID();
 		}
 
-		public static boolean isConnectedFast(Context context) {
+		public static String isConnectedFast(Context context) {
 			NetworkInfo info = Connectivity.getNetworkInfo(context);
-			return (info != null && info.isConnected() && Connectivity
-					.isConnectionFast(info.getType(), info.getSubtype()));
+			if ( (info != null && info.isConnected() ){
+				return Connectivity.isConnectionFast(info.getType(), info.getSubtype());
+			} else {
+				return "NONE";
+			}
 		}
 
-		public static boolean isConnectionFast(int type, int subType) {
+		public static String isConnectionFast(int type, int subType) {
 			if (type == ConnectivityManager.TYPE_WIFI) {
-				return true;
+				return "WIFI";
 			} else if (type == ConnectivityManager.TYPE_MOBILE) {
 				switch (subType) {
 				case TelephonyManager.NETWORK_TYPE_1xRTT:
-					return false; // ~ 50-100 kbps
+					return "2G"; // ~ 50-100 kbps
 				case TelephonyManager.NETWORK_TYPE_CDMA:
-					return false; // ~ 14-64 kbps
+					return "1G"; // ~ 14-64 kbps
 				case TelephonyManager.NETWORK_TYPE_EDGE:
-					return false; // ~ 50-100 kbps
+					return "2G"; // ~ 50-100 kbps
 				case TelephonyManager.NETWORK_TYPE_EVDO_0:
-					return true; // ~ 400-1000 kbps
+					return "3G"; // ~ 400-1000 kbps
 				case TelephonyManager.NETWORK_TYPE_EVDO_A:
-					return true; // ~ 600-1400 kbps
+					return "3G"; // ~ 600-1400 kbps
 				case TelephonyManager.NETWORK_TYPE_GPRS:
-					return false; // ~ 100 kbps
+					return "2G"; // ~ 100 kbps
 				case TelephonyManager.NETWORK_TYPE_HSDPA:
-					return true; // ~ 2-14 Mbps
+					return "3G"; // ~ 2-14 Mbps
 				case TelephonyManager.NETWORK_TYPE_HSPA:
-					return true; // ~ 700-1700 kbps
+					return "3G"; // ~ 700-1700 kbps
 				case TelephonyManager.NETWORK_TYPE_HSUPA:
-					return true; // ~ 1-23 Mbps
+					return "3G"; // ~ 1-23 Mbps
 				case TelephonyManager.NETWORK_TYPE_UMTS:
-					return true; // ~ 400-7000 kbps
+					return "3G"; // ~ 400-7000 kbps
 					/*
 					 * Above API level 7, make sure to set
 					 * android:targetSdkVersion to appropriate level to use
 					 * these
 					 */
 				case TelephonyManager.NETWORK_TYPE_EHRPD: // API level 11
-					return true; // ~ 1-2 Mbps
+					return "3G"; // ~ 1-2 Mbps
 				case TelephonyManager.NETWORK_TYPE_EVDO_B: // API level 9
-					return true; // ~ 5 Mbps
+					return "3G"; // ~ 5 Mbps
 				case TelephonyManager.NETWORK_TYPE_HSPAP: // API level 13
-					return true; // ~ 10-20 Mbps
+					return "4G"; // ~ 10-20 Mbps
 				case TelephonyManager.NETWORK_TYPE_IDEN: // API level 8
-					return false; // ~25 kbps
+					return "4G"; // ~25 kbps
 				case TelephonyManager.NETWORK_TYPE_LTE: // API level 11
-					return true; // ~ 10+ Mbps
+					return "4G"; // ~ 10+ Mbps
 					// Unknown
 				case TelephonyManager.NETWORK_TYPE_UNKNOWN:
 				default:
-					return false;
+					return "NONE";
 				}
 			} else {
-				return false;
+				return "NONE";
 			}
 		}
 
