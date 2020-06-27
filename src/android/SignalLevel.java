@@ -33,7 +33,7 @@ public class SignalLevel extends CordovaPlugin {
 		public void onSignalStrengthsChanged(SignalStrength signalStrength) {
 			super.onSignalStrengthsChanged(signalStrength);
 			try {
-				signalDBM = signalStrength.getGsmSignalStrength() + "";
+				signalDBM = signalStrength.getLevel() + "";
 			} catch (Exception e) {}
 			String jsonresult = getResults(signalDBM);
 			callbackContext.success(jsonresult);
@@ -60,18 +60,14 @@ public class SignalLevel extends CordovaPlugin {
 	public String getResults(String signalDBM) {
 		JSONObject details = new JSONObject();
 		try {
-			details.put("isconnected", Connectivity.isConnectedWifi(context)+"");
 			details.put("isConnectedWifi", Connectivity.isConnectedWifi(context)
 					+ "");
 			details.put("isConnectedMobile",
 					Connectivity.isConnectedMobile(context) + "");
-			details.put("WifiLinkSpeed", Connectivity.getWifiLinkSpeed(context)
-					+ "");
 			details.put("WifiSignalLevel",
 					Connectivity.getWifiSignalLevel(context) + "");
 			details.put("isConnectedFast", Connectivity.isConnectedFast(context)
 					+ "");
-			details.put("WifiBSSID", Connectivity.getWifiBSSID(context) + "");
 			String ssid = Connectivity.getWifiConnectionDetails(context);
 			details.put("wifiSSID", ssid);
 			details.put("cellSignalStrength", signalDBM);
