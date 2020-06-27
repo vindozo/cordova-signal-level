@@ -1,5 +1,6 @@
 # cordova-signal-level
 WIFI or GSM signal connect Level
+base - https://github.com/Solutions3E/cordova-androidConnectivity
 
 Installing the plugin
 The plugin confirms to the Cordova plugin specification, it can be installed using the Cordova / Phonegap command line interface.
@@ -27,7 +28,7 @@ return:
     {
 	isConnectedWifi: false,
 	isConnectedMobile: true,
-			WifiSignalLevel: 0,
-			MobileSignalLevel: 2,
+	WifiSignalLevel: 0,
+	MobileSignalLevel: 2,
 	ConnectedFast: "4G"
      }
