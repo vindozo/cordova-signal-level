@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="ru.vindozo.SignalLevel"
+        version="1.0">
+
+  <name>Android Connectivity</name>
+	<description>
+		This Android Phonegap plugin returns Signal Strength, Wifi Link Speed etc.
+	</description>
+	
+  <engines>
+    <engine name="cordova" version=">=3.0.0"/>
+  </engines>
+
+  <asset src="www/SignalLevel.js" target="js/SignalLevel.js"/>
+
+  <js-module src="www/SignalLevel.js" name="SignalLevel">
+    <clobbers target="SignalLevel" />
+  </js-module>
+
+  <platform name="android">
+
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="SignalLevel">
+        <param name="android-package" value="ru.vindozo.plugin.SignalLevel"/>
+      </feature>
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_UPDATES" />
+    </config-file>
+
+    <source-file src="src/android/SignalLevel.java" target-dir="src/com/eeesolutions/plugin/"/>
+  </platform>
+
+</plugin>
