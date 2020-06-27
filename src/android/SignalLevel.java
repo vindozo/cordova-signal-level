@@ -23,7 +23,7 @@ import android.widget.TextView;
 import java.util.List;
 import org.json.JSONObject;
 
-public class AndroidConnectivity extends CordovaPlugin {
+public class SignalLevel extends CordovaPlugin {
 	private String signalDBM;
 	TelephonyManager TelManager;
   CallbackContext callbackContext;
