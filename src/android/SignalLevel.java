@@ -126,7 +126,7 @@ public class SignalLevel extends CordovaPlugin {
 
 		public static String isConnectedFast(Context context) {
 			NetworkInfo info = Connectivity.getNetworkInfo(context);
-			if ( (info != null && info.isConnected() ){
+			if ( info != null && info.isConnected() ){
 				return Connectivity.isConnectionFast(info.getType(), info.getSubtype());
 			} else {
 				return "NONE";
