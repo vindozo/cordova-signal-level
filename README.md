@@ -24,10 +24,10 @@ Example - Get Android Connectivity Details as Json:
     });
 
 return:
-            {
-                isConnectedWifi: false
-                isConnectedMobile: true,
-				WifiSignalLevel: 0,
-				MobileSignalLevel: 2,
-                ConnectedFast: "4G"
-             }
+    {
+	isConnectedWifi: false,
+	isConnectedMobile: true,
+			WifiSignalLevel: 0,
+			MobileSignalLevel: 2,
+	ConnectedFast: "4G"
+     }
