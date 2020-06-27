@@ -22,3 +22,12 @@ Example - Get Android Connectivity Details as Json:
     function(err){
         alert("Error: "+(err));
     });
+
+return:
+            {
+                isConnectedWifi: false
+                isConnectedMobile: true,
+				WifiSignalLevel: 0,
+				MobileSignalLevel: 2,
+                ConnectedFast: "4G"
+             }
